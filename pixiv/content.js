@@ -41,5 +41,8 @@ function objParse(obj) {
         }
     }
 
+    // 替换 Pixiv 其他标记符号 `[[jumpuri: > ]]`
+    content = content.replace(`[newpage]`, `<div style="page-break-after:always"></div>`)
+    // content = content.replace(`[[jumpuri: > ]]`, `<a href="https://www.w3school.com.cn">访问 w3school.com.cn!</a>`)
     return content
 })()
