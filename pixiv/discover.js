@@ -14,9 +14,9 @@ function objParse(obj) {
 // 存储seriesID 有BUG无法处理翻页
 var seriesSet = new Set();
 
-function urlCoverUrl(url) {
-    return `${url},{"headers": {"Referer":"https://www.pixiv.net/"}}`
-}
+// function urlCoverUrl(url) {
+//     return `${url},{"headers": {"Referer":"https://www.pixiv.net/"}}`
+// }
 
 // 将多个长篇小说解析为一本书
 function combineNovels(novels) {
@@ -42,9 +42,9 @@ function getAjaxJson(url) {
     })
 }
 
-function urlUserAllWorks(uid) {
-    return `https://www.pixiv.net/ajax/user/${uid}/profile/all?lang=zh`
-}
+// function urlUserAllWorks(uid) {
+//     return `https://www.pixiv.net/ajax/user/${uid}/profile/all?lang=zh`
+// }
 
 function handNovels(novels) {
     novels.forEach(novel => {
@@ -55,7 +55,7 @@ function handNovels(novels) {
         if (novel.seriesId === undefined || novel.seriesId === null) {
             novel.tags.unshift("单本")
         } else {
-            let userAllWorks = getAjaxJson(urlUserAllWorks(novel.userId)).body
+            let userAllWorks = getAjaxJson(util.urlUserAllWorks(novel.userId)).body
             for (let series of userAllWorks.novelSeries) {
                 if (series.id === novel.seriesId) {
                     // let series = getAjaxJson(util.urlSeries(novel.seriesId)).body

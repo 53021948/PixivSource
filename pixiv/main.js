@@ -15,17 +15,17 @@ function urlCoverUrl(url) {
 }
 
 // 完全匹配用户名
-function urlSearchUser(username) {
-    return `https://www.pixiv.net/search_user.php?s_mode=s_usr&nick=${encodeURI(username)}&nick_mf=1`
-}
+// function urlSearchUser(username) {
+//     return `https://www.pixiv.net/search_user.php?s_mode=s_usr&nick=${encodeURI(username)}&nick_mf=1`
+// }
 
-function urlUserAllWorks(uid) {
-    return `https://www.pixiv.net/ajax/user/${uid}/profile/all?lang=zh`
-}
-
-function urlUserNovels(uid, nidList) {
-    return `https://www.pixiv.net/ajax/user/${uid}/novels?${nidList.map(v => "ids[]=" + v).join("&")}`
-}
+// function urlUserAllWorks(uid) {
+//     return `https://www.pixiv.net/ajax/user/${uid}/profile/all?lang=zh`
+// }
+//
+// function urlUserNovels(uid, nidList) {
+//     return `https://www.pixiv.net/ajax/user/${uid}/novels?${nidList.map(v => "ids[]=" + v).join("&")}`
+// }
 
 var first = true;
 
@@ -93,7 +93,7 @@ function handNovels(novels) {
         if (novel.seriesId === undefined || novel.seriesId === null) {
             novel.tags.unshift("单本")
         } else {
-            let userAllWorks = getAjaxJson(urlUserAllWorks(novel.userId)).body
+            let userAllWorks = getAjaxJson(util.urlUserAllWorks(novel.userId)).body
             for (let series of userAllWorks.novelSeries) {
                 if (series.id === novel.seriesId) {
                     // let series = getAjaxJson(util.urlSeries(novel.seriesId)).body
@@ -150,7 +150,7 @@ function getUserNovels(username) {
         return []
     }
 
-    let html = java.ajax(urlSearchUser(username))
+    let html = java.ajax(util.urlSearchUser(username))
     // java.log(html)
     // 仅匹配有投稿作品的用户
     let match = html.match(new RegExp("/users/\\d+/novels"))
@@ -172,9 +172,9 @@ function getUserNovels(username) {
     let page = Number(java.get("page"))
 
     uidList.forEach(id => {
-        let r = getAjaxJson(urlUserAllWorks(id))
+        let r = getAjaxJson(util.urlUserAllWorks(id))
         let novelsId = Object.keys(r.body.novels).reverse().slice((page - 1) * 20, page * 20)
-        let url = urlUserNovels(id, novelsId)
+        let url = util.urlUserNovels(id, novelsId)
         util.debugFunc(() => {
             java.log(`发送获取作者小说的Ajax请求:${url}`)
         })

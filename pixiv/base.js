@@ -50,7 +50,21 @@ function publicFunc() {
     u.urlSeriesIllusts = (seriesId) => {
         return `https://www.pixiv.net/ajax/series/${seriesId}?p=1&lang=zh`
     }
+    // 完全匹配用户名
+    u.urlSearchUser = (username) =>  {
+        return `https://www.pixiv.net/search_user.php?s_mode=s_usr&nick=${encodeURI(username)}&nick_mf=1`
+    }
 
+    u.urlUserAllWorks = (uid)  => {
+        return `https://www.pixiv.net/ajax/user/${uid}/profile/all?lang=zh`
+    }
+
+    u.urlUserNovels = (uid, nidList) => {
+        return `https://www.pixiv.net/ajax/user/${uid}/novels?${nidList.map(v => "ids[]=" + v).join("&")}`
+    }
+    u.urlCoverUrl = function(pxImgUrl) {
+        return `https://pximg.furrynovel.ink/?url=${pxImgUrl}`
+    }
 
     u.formatNovels = function (novels) {
         novels.forEach(novel => {
