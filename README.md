@@ -148,27 +148,33 @@ https://miaogongzi.lanzout.com/b01rgkhhe
 1. 阅读只是一个做了很多便于阅读的功能的浏览器
 2. 书源只是一个告知阅读软件如何向网站请求数据、如何处理数据的方法
 3. 真正的作品数据来自于书源内使用的网站
-4. 版权投诉请去源网站，向站方进行投诉
+4. 版权投诉请去源网站向站方投诉
 </details>
 
 # 鸣谢
 - 感谢 [阅读 3.0 ](https://github.com/gedoor/legado) 提供的软件平台
-- 感谢 [Linpx](https://github.com/libudu/linpx-web) 提供的网站服务 https://www.furrynovel.xyz
-- 感谢 新 Linpx 提供的网站服务 https://www.furrynovel.ink
-- 感谢 [兽人小说站](https://github.com/FurryNovel/Reader) 提供的网站服务 https://www.furrynovel.com
-- 感谢 [@DowneyRem](https://github.com/DowneyRem) 提供的教程，这是他的兽人小说分享频道 [@FurryNovels](https://t.me/FurryNovels)
+- 感谢 [Linpx](https://github.com/libudu/linpx-web) 提供的[网站服务](https://www.furrynovel.ink)
+- 感谢 [兽人小说站](https://github.com/FurryNovel/Reader) 提供的[网站服务](https://www.furrynovel.com)
+- 感谢 [Pixiv.cat](https://github.com/pixiv-cat/pixivcat-backend) 提供的 [Pixiv 图片代理功能](https://pixiv.cat)
+- 感谢 [@DowneyRem](https://github.com/DowneyRem) 提供的教程，这是他的兽人小说分享频道 [@FurryReading](https://t.me/FurryReading)
 
 
 # TODO
 - Pixiv 系列小说 专用书源
 - ~~Linpx 系列小说 专用书源~~
 - Pixiv 书源：添加网址加入书架
+- Pixiv 书源：追更列表 https://github.com/windyhusky/PixivSource/issues/14
+- Pixiv 书源：每日每周排行榜 https://github.com/windyhusky/PixivSource/issues/13
+- 兽人控小说站：书源（搜索，发现）
+
+<details>
+<summary> 已完成 TODO </summary>
+
 - ✅ Pixiv 订阅源
 - ✅ 兽人控小说站订阅源
 - ✅ Pixiv 书源：关注作者最新小说（按照时间排序关注作者的小说) https://github.com/windyhusky/PixivSource/issues/11
-- Pixiv 书源：追更列表 https://github.com/windyhusky/PixivSource/issues/14
-- Pixiv 书源：每日每周排行榜 https://github.com/windyhusky/PixivSource/issues/13
 - ✅ Linpx 书源：推荐作者的小说
-- 兽人控小说站：书源（搜索，发现）
-- Pixiv 书源：通过作品ID添加的插画 [pixivimage]
-- ~~Linpx 书源：通过作品ID添加的插画 [pixivimage]~~
+- ✅ Pixiv 书源：通过作品ID添加的插画 [pixivimage]
+- ✅ Linpx 书源：通过作品ID添加的插画 [pixivimage] （使用了 pixiv.cat 的服务）
+</details>
+
