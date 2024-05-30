@@ -44,12 +44,8 @@ function publicFunc() {
         return `https://www.pixiv.net/ajax/novel/series_content/${seriesId}?limit=${limit}&last_order=${offset}&order_by=asc&lang=zh`
     }
 
-    u.urlArtwork = (artworkId) => {
-        return `https://www.pixiv.net/ajax/illust/${artworkId}?lang=zh`
-    }
-    u.urlArtworkOriginal = (artworkId) => {
-        res = JSON.parse(`https://www.pixiv.net/ajax/illust/${artworkId}/pages`)
-        return res.body[0].urls.original
+    u.urlIllustDetailed = (illustId) => {
+        return `https://www.pixiv.net/ajax/illust/${illustId}?lang=zh`
     }
     u.urlSeriesIllusts = (seriesId) => {
         return `https://www.pixiv.net/ajax/series/${seriesId}?p=1&lang=zh`
