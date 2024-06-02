@@ -106,6 +106,6 @@ function objParse(obj) {
             }
         }
     }
-    content = content.replace(`[newpage]`, ``)
+
     return content
 })()
