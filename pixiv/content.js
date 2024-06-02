@@ -61,9 +61,17 @@ function objParse(obj) {
         }
     }
 
+    // 替换 Pixiv 跳转页面标记符号 `[[jump:]]`
+    matched = content.match(/\[jump:(\d+)]/gm)
+    if (matched) {
+        for (let i in matched) {
+            let page = matched[i].match(/\d+/)
+            content = content.replace(`${matched[i]}`, `\n\n跳转至第${page}节`)
+        }
+    }
 
     // 替换 Pixiv 链接标记符号 `[[jumpuri: > ]]`
-    matched = content.match(/\[\[jumpuri:(.*)>(.*)?]?]/gm)
+    matched = content.match(/\[\[jumpuri:(.*)>(.*)]]/gm)
     if (matched) {
         for (let i in matched) {
             let matched2 = matched[i].match(/\[\[jumpuri:(.*)>(.*)]]/m)
