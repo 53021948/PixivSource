@@ -66,8 +66,7 @@
             //content = content.replace(`${matchedText}`, `<a href=${urlLink}>${urlName}</a>`)
             if (urlLink === urlName) {
                 content = content.replace(`${matchedText}`, `${urlName}: ${urlLink}`)
-            }
-            else{
+            } else {
                 content = content.replace(`${matchedText}`, `${urlName}`)
             }
         }
