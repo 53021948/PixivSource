@@ -89,5 +89,25 @@ function objParse(obj) {
         }
     }
 
+    // 替换 Pixiv 注音标记符号 [[rb: > ]]
+    matched = content.match(/\[\[rb:(.*?)>(.*?)]]/gm)
+    if (matched) {
+        for (let i in matched) {
+            let matched2 = matched[i].match(/\[\[rb:(.*?)>(.*?)]]/m)
+            let matchedText = matched2[0]
+            let kanji = matched2[1].trim()
+            let kana = matched2[2].trim()
+            // kana为中文，则替换回《书名号》
+            var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+            if (reg.test(kana)) {
+                content = content.replace(`${matchedText}`, `${kanji}《${kana}》`)
+            } else{
+                // 阅读不支持 <ruby> <rt> 注音
+                // content = content.replace(`${matchedText}`, `<ruby>${kanji}<rt>${kana}</rt></ruby>`)
+                content = content.replace(`${matchedText}`, `${kanji}（${kana}）`)
+            }
+        }
+    }
+    content = content.replace(`[newpage]`, ``)
     return content
 })()
