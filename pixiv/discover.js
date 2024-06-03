@@ -109,6 +109,10 @@ function handlerFactory() {
     if (baseUrl.indexOf("/follow_latest") !== -1) {
         return handlerFollowLatest()
     }
+
+    if (baseUrl.indexOf("/watch_list") !== -1) {
+        return handlerWatchList()
+    }
 }
 
 function handlerFollowing() {
@@ -162,6 +166,57 @@ function handlerFollowLatest() {
     return () => {
         let resp = JSON.parse(result)
         return util.formatNovels(handNovels(combineNovels(resp.body.thumbnails.novel)))
+    }
+}
+
+
+
+function seriesHandler(seriesId) {
+    const limit = 30
+    let returnList = [];
+    let allChaptersCount = (() => {
+        let result = util.cacheGetAndSet(util.urlSeries(seriesId), () => {
+            return JSON.parse(java.ajax(util.urlSeries(seriesId)))
+        }).body.total
+        util.debugFunc(() => {
+            java.log(`本目录一共有:${result} 章节`);
+        })
+        return result;
+    })();
+
+    //发送请求获得相应数量的目录列表
+    function sendAjaxForGetChapters(lastIndex) {
+        let url = util.urlSeriesNovels(seriesId, limit, lastIndex)
+        res = util.cacheGetAndSet(url, () => {
+            return JSON.parse(java.ajax(url))
+        })
+        res = res.body.page.seriesContents
+        res.forEach(v => {
+            v.chapterUrl = util.urlNovelDetailed(v.id)
+        })
+        return res;
+    }
+
+    //逻辑控制者 也就是使用上面定义的两个函数来做对应功能
+    //要爬取的总次数
+    let max = (allChaptersCount / limit) + 1
+    for (let i = 0; i < max; i++) {
+        //java.log("i的值:"+i)
+        let list = sendAjaxForGetChapters(i * limit);
+        //取出每个值
+        returnList = returnList.concat(list)
+        java.log(returnList)
+    }
+    return returnList
+}
+
+
+// 关注列表
+function handlerWatchList(){
+    return () => {
+        let resp = JSON.parse(result)
+        java.log(resp.body.thumbnails.novelSeries)
+        return util.formatNovels(seriesHandler(resp.body.thumbnails.novelSeries[0]))
     }
 }
 
