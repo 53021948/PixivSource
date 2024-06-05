@@ -31,7 +31,7 @@ function objParse(obj) {
     if (matched) {
         for (let i in matched) {
             let illustId = matched[i].match(RegExp("\\d+"))
-            content = content.replace(`${matched[i]}`, `<img src="${util.urlIllustUrl(illustId)}">`)
+            content = content.replace(`${matched[i]}`, `<img src="${util.urlIllustOriginalUrl (illustId)}">`)
         }
     }
 
