@@ -38,6 +38,8 @@ function objParse(obj) {
     //这里不能直接用book.xxx 来复用搜索页处理结果
     prop.author = res.userName
     prop.count = book.wordCount
+    // prop.count = res.length
+    // prop.tags = res.tags
     prop.desc = res.desc
     prop.cover_url = util.urlCoverUrl(res.coverUrl)
 
